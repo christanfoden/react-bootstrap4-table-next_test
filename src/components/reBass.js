@@ -23,7 +23,7 @@ class Rebass extends Component {
       LastName: "",
       EmailAddress: "",
       Id: "",
-      visable: true,
+      visible: false,
       activeItem: "testPage"
     };
   }
@@ -51,7 +51,10 @@ class Rebass extends Component {
 
   handleSidebarHide = () => this.setState({ visible: false });
 
-  handleItemClick = (e, { name }) => this.setState({ activeItem: name });
+  handleItemClick = (e, { name }) => {
+    this.setState({ activeItem: name });
+    this.setState({ visible: false });
+  };
 
   handleChange = e => {
     this.setState({ [e.target.name]: e.target.value });
