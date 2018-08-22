@@ -24,7 +24,7 @@ class Rebass extends Component {
       EmailAddress: "",
       Id: "",
       visible: false,
-      activeItem: "testPage"
+      activeItem: "formPage"
     };
   }
 
@@ -78,80 +78,74 @@ class Rebass extends Component {
   renderPages = () => {
     const { activeItem, users } = this.state;
     switch (activeItem) {
-      case "testPage":
+      case "formPage":
         return (
-          <Container>
-            <Heading>Test Page</Heading>
-            {/* <Flex flexWrap="wrap"> */}
-            <Row>
-              <Col lg="6">
-                <Card my={20}>
-                  <Box p={2}>
-                    <form onSubmit={this.handleSubmit}>
-                      <Label>Id</Label>
-                      <Input
-                        type="text"
-                        placeholder="Enter Id"
-                        name="Id"
-                        value={this.state.Id}
-                        onChange={this.handleChange}
-                      />
-                      <Divider />
-                      <Label>FirstName</Label>
-                      <Input
-                        type="text"
-                        placeholder="Enter FirstName"
-                        name="FirstName"
-                        value={this.state.FirstName}
-                        onChange={this.handleChange}
-                      />
-                      <Divider />
-                      <Label>LastName</Label>
-                      <Input
-                        type="text"
-                        placeholder="Enter LastName"
-                        name="LastName"
-                        value={this.state.LastName}
-                        onChange={this.handleChange}
-                      />
-                      <Divider />
-                      <Label>LastName</Label>
-                      <Input
-                        type="email"
-                        placeholder="Enter email address"
-                        name="EmailAddress"
-                        value={this.state.EmailAddress}
-                        onChange={this.handleChange}
-                      />
-                      <Divider />
-                      <Button>Submit</Button>
-                    </form>
-                  </Box>
-                </Card>
-              </Col>
-              <Col lg="6">
-                {/* <Flex flexWrap="wrap"> */}
-                {users.map((user, idx) => (
-                  <Box my={20} key={idx}>
-                    <Card>
-                      <Box p={2}>
-                        <Subhead>{user.FirstName}</Subhead>
-                        <Small>userId: {user.Id}</Small>
-                        <Text>lastName: {user.LastName}</Text>{" "}
-                        <Text>email: {user.EmailAddress}</Text>
-                      </Box>
-                    </Card>
-                  </Box>
-                ))}
-                {/* </Flex> */}
-              </Col>
-            </Row>
-            {/* </Flex> */}
+          <Container fluid>
+            <Heading>Form</Heading>
+            <Card my={20}>
+              <Box p={2}>
+                <form onSubmit={this.handleSubmit}>
+                  <Label>Id</Label>
+                  <Input
+                    type="text"
+                    placeholder="Enter Id"
+                    name="Id"
+                    value={this.state.Id}
+                    onChange={this.handleChange}
+                  />
+                  <Divider />
+                  <Label>FirstName</Label>
+                  <Input
+                    type="text"
+                    placeholder="Enter FirstName"
+                    name="FirstName"
+                    value={this.state.FirstName}
+                    onChange={this.handleChange}
+                  />
+                  <Divider />
+                  <Label>LastName</Label>
+                  <Input
+                    type="text"
+                    placeholder="Enter LastName"
+                    name="LastName"
+                    value={this.state.LastName}
+                    onChange={this.handleChange}
+                  />
+                  <Divider />
+                  <Label>LastName</Label>
+                  <Input
+                    type="email"
+                    placeholder="Enter email address"
+                    name="EmailAddress"
+                    value={this.state.EmailAddress}
+                    onChange={this.handleChange}
+                  />
+                  <Divider />
+                  <Button>Submit</Button>
+                </form>
+              </Box>
+            </Card>
           </Container>
         );
-      // break;
-      case "reviews":
-        return <h1>Reviews</h1>;
+        break;
+      case "usersPage":
+        return (
+          <Container fluid>
+            <Heading>Users</Heading>
+            {users.map((user, idx) => (
+              <Box my={20} key={idx}>
+                <Card>
+                  <Box p={2}>
+                    <Subhead>{user.FirstName}</Subhead>
+                    <Small>userId: {user.Id}</Small>
+                    <Text>lastName: {user.LastName}</Text>{" "}
+                    <Text>email: {user.EmailAddress}</Text>
+                  </Box>
+                </Card>
+              </Box>
+            ))}
+          </Container>
+        );
       // break;
       case "upcomingEvents":
         return <h1>upcomingEvents</h1>;
@@ -166,12 +160,19 @@ class Rebass extends Component {
     return (
       <div>
         <div>
-          <Button
-            onClick={this.handleButtonClick}
-            style={{ marginLeft: 15, marginTop: 15 }}
-          >
-            <Icon name="bars" />
-          </Button>
+          <Row>
+            <Col sm="2">
+              <Button
+                onClick={this.handleButtonClick}
+                style={{ marginLeft: 15, marginTop: 15 }}
+              >
+                <Icon name="bars" />
+              </Button>
+            </Col>
+            <Col sm="10">
+              <h1 style={{ margin: 15 }}>Cosnetics/Offkey Test</h1>
+            </Col>
+          </Row>
 
           <Sidebar.Pushable as={Segment}>
             <Sidebar
@@ -186,25 +187,16 @@ class Rebass extends Component {
               activeItem={this.state.activeItem}
             >
               <Menu.Item
-                as="a"
-                tag="/test"
-                name="testPage"
-                active={activeItem === "testPage"}
-                content="Test Page"
+                name="formPage"
+                active={activeItem === "formPage"}
+                content="Form"
                 onClick={this.handleItemClick}
               />
 
               <Menu.Item
-                name="reviews"
-                active={activeItem === "reviews"}
-                content="Reviews"
-                onClick={this.handleItemClick}
-              />
-
-              <Menu.Item
-                name="upcomingEvents"
-                active={activeItem === "upcomingEvents"}
-                content="Upcoming Events"
+                name="usersPage"
+                active={activeItem === "usersPage"}
+                content="Users"
                 onClick={this.handleItemClick}
               />
             </Sidebar>
